@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/custom-components/static/css/main.d982b0bd.css",
+    "main.js": "/custom-components/static/js/main.45283e38.js",
+    "index.html": "/custom-components/index.html",
+    "main.d982b0bd.css.map": "/custom-components/static/css/main.d982b0bd.css.map",
+    "main.45283e38.js.map": "/custom-components/static/js/main.45283e38.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d982b0bd.css",
+    "static/js/main.45283e38.js"
+  ]
+}
