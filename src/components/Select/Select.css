@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
+:root {
+	/**COLOR*/
+	--base: #202020;
+	--dark: #333533;
+	--dark-accent: #23395d;
+	--light: whitesmoke;
+	--light-accent: #03a89e;
+	--danger: #ff2400;
+	--danger-accent: #faa0a0;
+
+	/**TEXT*/
+	--main-font: "Source Code Pro", monospace;
+	--text-color: var(--light);
+	--font-size: 2.5em;
+
+	/**WIDTHS & HEIGHTS*/
+	--select-width: 20em;
+	--select-height: 2em;
+
+	/**UTILITY*/
+	--select-border: solid 0.1em var(--dark);
+	--select-radius: 0.5em;
+	--select-gap: 0.5em;
+	--select-padding: 0.5em;
+	--option-padding: 0.125em var(--select-padding);
+}
+
+button {
+	all: unset;
+}
+
+.select__container {
+	position: relative;
+	width: var(--select-width);
+	min-height: var(--select-height);
+	padding: var(--select-padding);
+
+	border: var(--select-border);
+	border-radius: var(--select-radius);
+	outline: none;
+
+	display: flex;
+	align-items: center;
+
+	color: var(--text-color);
+	font-family: var(--main-font);
+	font-size: var(--font-size);
+}
+
+.select__container:focus,
+.select__container:hover {
+	cursor: pointer;
+	border-color: var(--light-accent);
+}
+
+.select__value {
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	gap: var(--select-gap);
+}
+
+.select__badge {
+	padding: 0.15em 0.25em;
+	background: var(--base);
+	border: var(--select-border);
+	border-radius: var(--select-radius);
+	outline: none;
+
+	display: flex;
+	align-items: center;
+	gap: var(--select-gap);
+
+	cursor: pointer;
+}
+
+.select__badge:hover,
+.select__badge:focus {
+	background-color: var(--danger-accent);
+	border-color: var(--danger);
+}
+
+.select__badge:hover > .select__badge__remove,
+.select__badge:focus > .select__badge__remove {
+	color: var(--danger);
+}
+
+.select__badge > .select__badge__remove {
+	font-size: 1.25em;
+}
+
+.select__utility {
+	width: fit-content;
+	height: 100%;
+
+	justify-self: flex-end;
+
+	display: flex;
+	align-items: center;
+	gap: var(--select-gap);
+}
+
+.select__clear {
+	background: none;
+	border: none;
+	outline: none;
+
+	color: var(--text-color);
+	font-size: 1em;
+
+	cursor: pointer;
+}
+
+.select__clear:hover {
+	color: var(--light-accent);
+}
+
+.select__separator {
+	background-color: var(--text-color);
+	align-self: stretch;
+	width: 0.075em;
+	border-radius: var(--select-radius);
+}
+
+.select__arrow {
+	translate: 0% 35%;
+	border: 0.25em solid transparent;
+	border-top-color: var(--text-color);
+}
+
+.select__arrow.open {
+	translate: 0% -35%;
+	border-top-color: transparent;
+	border-bottom-color: var(--text-color);
+}
+
+.select__options {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: calc(100% + var(--select-gap));
+
+	max-height: 10em;
+
+	border: var(--select-border);
+	border-radius: var(--select-radius);
+
+	display: none;
+
+	list-style: none;
+	overflow-y: auto;
+	z-index: 100;
+}
+
+.select__options.show {
+	display: block;
+}
+
+.select__option {
+	padding: var(--option-padding);
+	background-color: var(--base);
+}
+
+.select__option.selected {
+	background-color: var(--dark-accent);
+}
+
+.select__option.highlighted {
+	cursor: pointer;
+	background-color: var(--light-accent);
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+	:root {
+		/**TEXT*/
+		--font-size: 2em;
+
+		/**WIDTHS & HEIGHTS*/
+		--select-width: 100%;
+	}
+}
+
+@media (max-width: 767px) {
+	:root {
+		/**TEXT*/
+		--font-size: 1.25em;
+
+		/**WIDTHS & HEIGHTS*/
+		--select-width: 100%;
+	}
+}
