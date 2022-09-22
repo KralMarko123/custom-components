@@ -1,18 +1,17 @@
-import Select from "./components/Select/Select";
 import { useState } from "react";
 import { SelectOption } from "./components/Select/SelectTypes";
-
-const options = [
-	{ label: "First", value: 1 },
-	{ label: "Second", value: 2 },
-	{ label: "Third", value: 3 },
-	{ label: "Fourth", value: 4 },
-	{ label: "Fifth", value: 5 },
-];
+import Select from "./components/Select/Select";
+import DATA from "./constants/data.json";
+import Table from "./components/Table/Table";
 
 const App = () => {
-	const [value1, setValue1] = useState<SelectOption[]>([options[0]]);
-	const [value2, setValue2] = useState<SelectOption | undefined>(options[0]);
+	const [multipleSelectValue, setMultipleSelectValue] = useState<SelectOption[]>([
+		DATA.selectOptions[0],
+	]);
+	const [singleSelectValue, setSingleSelectValue] = useState<SelectOption | undefined>(
+		DATA.selectOptions[0]
+	);
+
 	return (
 		<div className="home page">
 			<h1 className="home__desc">
@@ -23,11 +22,20 @@ const App = () => {
 				<h3 className="container__title">Single/Multiple Select</h3>
 				<Select
 					multiple
-					value={value1}
-					options={options}
-					onChange={(option) => setValue1(option)}
+					value={multipleSelectValue}
+					options={DATA.selectOptions}
+					onChange={(option) => setMultipleSelectValue(option)}
 				/>
-				<Select value={value2} options={options} onChange={(option) => setValue2(option)} />
+				<Select
+					value={singleSelectValue}
+					options={DATA.selectOptions}
+					onChange={(option) => setSingleSelectValue(option)}
+				/>
+			</div>
+
+			<div className="container">
+				<h3 className="container__title">Table</h3>
+				<Table data={DATA.tableData} />
 			</div>
 		</div>
 	);

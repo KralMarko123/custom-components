@@ -1,0 +1,20 @@
+{
+	"selectOptions": [
+		{ "label": "First", "value": 1 },
+		{ "label": "Second", "value": 2 },
+		{ "label": "Third", "value": 3 },
+		{ "label": "Fourth", "value": 4 },
+		{ "label": "Fifth", "value": 5 }
+	],
+
+	"tableData": {
+		"headers": ["Id", "Name", "Age", "Date of Birth", "Job", "Likes"],
+		"entries": [
+			[1, "Marko Markovikj", 23, "30-04-1999", "QA", "Dancing"],
+			[2, "Jana Markovikj", 23, "30-04-1999", "QA", "Drawing"],
+			[3, "Teo Markovikj", 26, "10-02-1996", "Video Editor", "Drawing"],
+			[4, "Filip Markovikj", 53, "30-10-1969", "Interpreter", "Cycling"],
+			[5, "Elisaveta Markovikj", 52, "09-02-1970", "Archivist", "Dogs"]
+		]
+	}
+}

@@ -1,0 +1,57 @@
+:root {
+	/**COLOR*/
+	--base: #202020;
+	--dark: #333533;
+	--dark-accent: #23395d;
+	--light: whitesmoke;
+	--light-accent: #03a89e;
+	--danger: #ff2400;
+	--danger-accent: #faa0a0;
+
+	/**TEXT*/
+	--main-font: "Source Code Pro", monospace;
+	--text-color: var(--light);
+	--table-font-size: 1.5em;
+
+	/**WIDTHS & HEIGHTS*/
+	--table-width: 100%;
+
+	/**UTILITY*/
+	--table-border: solid 0.125em var(--dark);
+	--cell-padding: 0.5em;
+}
+
+.table__container {
+	width: var(--table-width);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	overflow-x: auto;
+}
+
+.table {
+	font-family: var(--main-font);
+	font-size: var(--table-font-size);
+	color: var(--text-color);
+}
+
+.table,
+.table__header__cell,
+.table__cell {
+	border: var(--table-border);
+	border-collapse: collapse;
+}
+
+.table__header__cell,
+.table__cell {
+	text-align: start;
+	padding: var(--cell-padding);
+}
+
+.table__header__cell {
+	text-transform: uppercase;
+	background-color: var(--dark-accent);
+	border-color: var(--text-color);
+}
