@@ -35,7 +35,7 @@ const App = () => {
 
 			<div className="container">
 				<h3 className="container__title">Table</h3>
-				<Table data={DATA.tableData} />
+				<Table data={DATA.tableData} striped/>
 			</div>
 		</div>
 	);

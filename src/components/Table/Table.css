@@ -51,7 +51,18 @@
 }
 
 .table__header__cell {
-	text-transform: uppercase;
 	background-color: var(--dark-accent);
 	border-color: var(--text-color);
+
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.table__header__cell:hover,
+.table__header__cell:focus {
+	background-color: var(--light-accent);
+}
+
+.table__row.striped .table__cell {
+	background-color: var(--dark);
 }
