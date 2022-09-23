@@ -111,8 +111,9 @@ const Select = ({ multiple, value, onChange, options }: SelectProps) => {
 				{options.map((option, index) => (
 					<li
 						key={option.value}
-						className={`select__option ${isOptionSelected(option) && "selected"} ${index ===
-							highlightedIndex && "highlighted"}`}
+						className={`select__option ${isOptionSelected(option) && "selected"} ${
+							index === highlightedIndex && "highlighted"
+						}`}
 						onClick={(e) => {
 							e.stopPropagation();
 							selectOption(option);
