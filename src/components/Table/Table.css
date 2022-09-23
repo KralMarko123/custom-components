@@ -49,16 +49,14 @@
 }
 
 .table__header__cell {
-	cursor: pointer;
 	position: relative;
+	padding-right: 1.5em;
 	background-color: var(--dark-accent);
 	border: var(--table-border);
 	border-color: var(--text-color);
 
-	padding-right: 1.5em;
-
 	text-transform: uppercase;
-	z-index: 100;
+	cursor: pointer;
 }
 
 .table__header__cell.ascending::after {

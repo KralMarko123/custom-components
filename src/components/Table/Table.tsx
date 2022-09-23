@@ -15,28 +15,41 @@ const Table = ({ data, striped }: TableProps) => {
 	};
 
 	const sortAscending = (index: number) => {
-		headers[index].sortOrder = "ascending";
-		setEntries([
+		let sortedHeaders = headers;
+		sortedHeaders[index].sortOrder = "ascending";
+		setHeaders(sortedHeaders);
+
+		let ascendingEntries = [
 			...entries.sort((a, b) => {
 				if (b[index] < a[index]) return 1;
 				return 0;
 			}),
-		]);
+		];
+		setEntries(ascendingEntries);
 	};
 
 	const sortDescending = (index: number) => {
-		headers[index].sortOrder = "descending";
-		setEntries([
+		let sortedHeaders = headers;
+		sortedHeaders[index].sortOrder = "descending";
+		setHeaders(sortedHeaders);
+
+		let descendingEntries = [
 			...entries.sort((a, b) => {
 				if (b[index] > a[index]) return 1;
 				return 0;
 			}),
-		]);
+		];
+		setEntries(descendingEntries);
+	};
+
+	const clearSortingForOtherHeaders = (index: number) => {
+		let currentHeaders = headers;
+		currentHeaders.forEach((h, i) => (index !== i ? (h.sortOrder = "") : null));
+		setHeaders(currentHeaders);
 	};
 
 	const handleHeaderClick = (index: number) => {
-		headers.forEach((h, i) => (index !== i ? (h.sortOrder = "") : null));
-
+		clearSortingForOtherHeaders(index);
 		if (headers[index].sortOrder === "ascending") {
 			sortDescending(index);
 		} else if (headers[index].sortOrder === "descending") {
@@ -46,11 +59,11 @@ const Table = ({ data, striped }: TableProps) => {
 
 	useEffect(() => {
 		const generateHeaders = () => {
-			let headerArray: {}[] = [];
+			let initialHeaders: {}[] = [];
 			data.headers.forEach((h) => {
-				headerArray.push({ header: h, sortOrder: "" });
+				initialHeaders.push({ header: h, sortOrder: "" });
 			});
-			setHeaders(headerArray);
+			setHeaders(initialHeaders);
 		};
 		generateHeaders();
 	}, []);
