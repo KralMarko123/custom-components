@@ -1,13 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { TableProps } from "./TableTypes";
 import "./Table.css";
 
 const Table = ({ data, striped }: TableProps) => {
+	const [headers, setHeaders] = useState<Array<any>>([]);
 	const [entries, setEntries] = useState(data.entries);
-	const headerRef = useRef<HTMLTableCellElement>(null);
 
 	const areHeadersEmpty = () => {
-		return data.headers.length === 0;
+		return headers.length === 0;
 	};
 
 	const areEntriesEmpty = () => {
@@ -15,8 +15,7 @@ const Table = ({ data, striped }: TableProps) => {
 	};
 
 	const sortAscending = (index: number) => {
-		headerRef.current?.classList.remove("desc");
-		headerRef.current?.classList.add("asc");
+		headers[index].sortOrder = "ascending";
 		setEntries([
 			...entries.sort((a, b) => {
 				if (b[index] < a[index]) return 1;
@@ -26,8 +25,7 @@ const Table = ({ data, striped }: TableProps) => {
 	};
 
 	const sortDescending = (index: number) => {
-		headerRef.current?.classList.remove("asc");
-		headerRef.current?.classList.add("desc");
+		headers[index].sortOrder = "descending";
 		setEntries([
 			...entries.sort((a, b) => {
 				if (b[index] > a[index]) return 1;
@@ -37,12 +35,25 @@ const Table = ({ data, striped }: TableProps) => {
 	};
 
 	const handleHeaderClick = (index: number) => {
-		if (headerRef.current?.classList.contains("asc")) {
+		headers.forEach((h, i) => (index !== i ? (h.sortOrder = "") : null));
+
+		if (headers[index].sortOrder === "ascending") {
 			sortDescending(index);
-		} else if (headerRef.current?.classList.contains("desc")) {
+		} else if (headers[index].sortOrder === "descending") {
 			sortAscending(index);
 		} else sortAscending(index);
 	};
+
+	useEffect(() => {
+		const generateHeaders = () => {
+			let headerArray: {}[] = [];
+			data.headers.forEach((h) => {
+				headerArray.push({ header: h, sortOrder: "" });
+			});
+			setHeaders(headerArray);
+		};
+		generateHeaders();
+	}, []);
 
 	return (
 		<div className="table__container">
@@ -50,18 +61,19 @@ const Table = ({ data, striped }: TableProps) => {
 				<thead className="table__header">
 					<tr className="table__row">
 						{!areHeadersEmpty() ? (
-							data.headers.map((h, index) => (
+							headers.map((h, index) => (
 								<th
-									key={h}
-									className="table__header__cell"
+									key={index}
+									className={`table__header__cell ${h.sortOrder}`}
 									onClick={() => handleHeaderClick(index)}
-									ref={headerRef}
 								>
-									{h}
+									{h.header}
 								</th>
 							))
 						) : (
-							<th className="empty__header">No Headers Present.</th>
+							<th className="empty__header" colSpan={100} style={{ textAlign: "center" }}>
+								No Headers Present.
+							</th>
 						)}
 					</tr>
 				</thead>
@@ -78,7 +90,9 @@ const Table = ({ data, striped }: TableProps) => {
 						))
 					) : (
 						<tr className="table__row empty__body">
-							<td className="table__cell">No Entries Present.</td>
+							<td className="table__cell" colSpan={100} style={{ textAlign: "center" }}>
+								No Entries Present.
+							</td>
 						</tr>
 					)}
 				</tbody>
