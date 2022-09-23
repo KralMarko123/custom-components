@@ -66,6 +66,17 @@ const Table = ({ data, striped }: TableProps) => {
 									key={index}
 									className={`table__header__cell ${h.sortOrder}`}
 									onClick={() => handleHeaderClick(index)}
+									onKeyDown={(e) => {
+										switch (e.key) {
+											case "Enter":
+											case "Space":
+												handleHeaderClick(index);
+												break;
+											default:
+												break;
+										}
+									}}
+									tabIndex={0}
 								>
 									{h.header}
 								</th>

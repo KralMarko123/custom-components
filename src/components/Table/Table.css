@@ -89,6 +89,7 @@
 .table__header__cell:hover,
 .table__header__cell:focus {
 	background-color: var(--light-accent);
+	outline: none;
 }
 
 .table__row.striped .table__cell {
