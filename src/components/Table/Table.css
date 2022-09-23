@@ -49,6 +49,7 @@
 }
 
 .table__header__cell {
+	cursor: pointer;
 	position: relative;
 	background-color: var(--dark-accent);
 	border: var(--table-border);
@@ -57,6 +58,7 @@
 	padding-right: 1.5em;
 
 	text-transform: uppercase;
+	z-index: 100;
 }
 
 .table__header__cell.ascending::after {
@@ -89,10 +91,6 @@
 .table__header__cell:focus {
 	background-color: var(--light-accent);
 	outline: none;
-}
-
-.table__header__cell:hover {
-	cursor: pointer;
 }
 
 .table__row.striped .table__cell {
