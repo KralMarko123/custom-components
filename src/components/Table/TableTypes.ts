@@ -1,6 +1,6 @@
 export type TableProps = {
 	striped?: boolean;
-	data: {
+	data?: {
 		headers: string[];
 		entries: any[][];
 	};

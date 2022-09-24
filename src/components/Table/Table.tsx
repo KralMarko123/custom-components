@@ -3,8 +3,8 @@ import { TableProps } from "./TableTypes";
 import "./Table.css";
 
 const Table = ({ data, striped }: TableProps) => {
-	const [headers, setHeaders] = useState<Array<any>>([]);
-	const [entries, setEntries] = useState(data.entries);
+	const [headers, setHeaders] = useState<any[]>([]);
+	const [entries, setEntries] = useState<any[][]>([]);
 
 	const areHeadersEmpty = () => {
 		return headers.length === 0;
@@ -15,31 +15,23 @@ const Table = ({ data, striped }: TableProps) => {
 	};
 
 	const sortAscending = (index: number) => {
-		let sortedHeaders = headers;
-		sortedHeaders[index].sortOrder = "ascending";
-		setHeaders(sortedHeaders);
+		let sortedEntries = [...entries].sort((a, b) => {
+			if (b[index] < a[index]) return 1;
+			return 0;
+		});
 
-		let ascendingEntries = [
-			...entries.sort((a, b) => {
-				if (b[index] < a[index]) return 1;
-				return 0;
-			}),
-		];
-		setEntries(ascendingEntries);
+		headers[index].sortOrder = "ascending";
+		setEntries(sortedEntries);
 	};
 
 	const sortDescending = (index: number) => {
-		let sortedHeaders = headers;
-		sortedHeaders[index].sortOrder = "descending";
-		setHeaders(sortedHeaders);
+		let sortedEntries = [...entries].sort((a, b) => {
+			if (b[index] > a[index]) return 1;
+			return 0;
+		});
 
-		let descendingEntries = [
-			...entries.sort((a, b) => {
-				if (b[index] > a[index]) return 1;
-				return 0;
-			}),
-		];
-		setEntries(descendingEntries);
+		headers[index].sortOrder = "descending";
+		setEntries(sortedEntries);
 	};
 
 	const clearSortingForOtherHeaders = (index: number) => {
@@ -60,12 +52,22 @@ const Table = ({ data, striped }: TableProps) => {
 	useEffect(() => {
 		const generateHeaders = () => {
 			let initialHeaders: {}[] = [];
-			data.headers.forEach((h) => {
+			data?.headers.forEach((h) => {
 				initialHeaders.push({ header: h, sortOrder: "" });
 			});
 			setHeaders(initialHeaders);
 		};
+
+		const generateEntries = () => {
+			let initialEntries: any[][] = [];
+			data?.entries.forEach((e) => {
+				initialEntries.push(e);
+			});
+			setEntries(initialEntries);
+		};
+
 		generateHeaders();
+		generateEntries();
 	}, []);
 
 	return (
@@ -78,7 +80,6 @@ const Table = ({ data, striped }: TableProps) => {
 								<th
 									key={index}
 									className={`table__header__cell ${h.sortOrder}`}
-									onClick={() => handleHeaderClick(index)}
 									onKeyDown={(e) => {
 										switch (e.key) {
 											case "Enter":
@@ -89,6 +90,7 @@ const Table = ({ data, striped }: TableProps) => {
 												break;
 										}
 									}}
+									onClick={() => handleHeaderClick(index)}
 									tabIndex={0}
 								>
 									{h.header}
