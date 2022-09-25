@@ -34,7 +34,7 @@ const Table = ({ data, striped }: TableProps) => {
 
 		generateHeaders();
 		generateEntries();
-	}, []);
+	}, [data]);
 
 	useEffect(() => {
 		const sortAscending = (index: number) => {
