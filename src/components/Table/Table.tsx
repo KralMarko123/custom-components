@@ -5,6 +5,7 @@ import "./Table.css";
 const Table = ({ data, striped }: TableProps) => {
 	const [headers, setHeaders] = useState<any[]>([]);
 	const [entries, setEntries] = useState<any[][]>([]);
+	const [sortApplied, setSortApplied] = useState({ sort: false, index: 0 });
 
 	const areHeadersEmpty = () => {
 		return headers.length === 0;
@@ -12,41 +13,6 @@ const Table = ({ data, striped }: TableProps) => {
 
 	const areEntriesEmpty = () => {
 		return entries.length === 0;
-	};
-
-	const sortAscending = (index: number) => {
-		let sortedEntries = [...entries].sort((a, b) => {
-			if (b[index] < a[index]) return 1;
-			return 0;
-		});
-
-		headers[index].sortOrder = "ascending";
-		setEntries(sortedEntries);
-	};
-
-	const sortDescending = (index: number) => {
-		let sortedEntries = [...entries].sort((a, b) => {
-			if (b[index] > a[index]) return 1;
-			return 0;
-		});
-
-		headers[index].sortOrder = "descending";
-		setEntries(sortedEntries);
-	};
-
-	const clearSortingForOtherHeaders = (index: number) => {
-		let currentHeaders = headers;
-		currentHeaders.forEach((h, i) => (index !== i ? (h.sortOrder = "") : null));
-		setHeaders(currentHeaders);
-	};
-
-	const handleHeaderClick = (index: number) => {
-		clearSortingForOtherHeaders(index);
-		if (headers[index].sortOrder === "ascending") {
-			sortDescending(index);
-		} else if (headers[index].sortOrder === "descending") {
-			sortAscending(index);
-		} else sortAscending(index);
 	};
 
 	useEffect(() => {
@@ -70,6 +36,48 @@ const Table = ({ data, striped }: TableProps) => {
 		generateEntries();
 	}, []);
 
+	useEffect(() => {
+		const sortAscending = (index: number) => {
+			let sortedEntries = [...entries].sort((a, b) => {
+				if (b[index] < a[index]) return 1;
+				return 0;
+			});
+
+			headers[index].sortOrder = "ascending";
+			setEntries(sortedEntries);
+		};
+
+		const sortDescending = (index: number) => {
+			let sortedEntries = [...entries].sort((a, b) => {
+				if (b[index] > a[index]) return 1;
+				return 0;
+			});
+
+			headers[index].sortOrder = "descending";
+			setEntries(sortedEntries);
+		};
+
+		const clearSortingForOtherHeaders = (index: number) => {
+			let currentHeaders = headers;
+			currentHeaders.forEach((h, i) => (index !== i ? (h.sortOrder = "") : null));
+			setHeaders(currentHeaders);
+		};
+
+		const handleHeaderClick = (index: number) => {
+			clearSortingForOtherHeaders(index);
+			if (headers[index].sortOrder === "ascending") {
+				sortDescending(index);
+			} else if (headers[index].sortOrder === "descending") {
+				sortAscending(index);
+			} else sortAscending(index);
+		};
+
+		if (sortApplied.sort === true) {
+			handleHeaderClick(sortApplied.index);
+			setSortApplied({ sort: false, index: 0 });
+		}
+	}, [sortApplied]);
+
 	return (
 		<div className="table__container">
 			<table className="table">
@@ -84,13 +92,13 @@ const Table = ({ data, striped }: TableProps) => {
 										switch (e.key) {
 											case "Enter":
 											case "Space":
-												handleHeaderClick(index);
+												setSortApplied({ sort: true, index: index });
 												break;
 											default:
 												break;
 										}
 									}}
-									onClick={() => handleHeaderClick(index)}
+									onClick={() => setSortApplied({ sort: true, index: index })}
 									tabIndex={0}
 								>
 									{h.header}
