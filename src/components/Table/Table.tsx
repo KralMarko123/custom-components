@@ -38,23 +38,21 @@ const Table = ({ data, striped }: TableProps) => {
 
 	useEffect(() => {
 		const sortAscending = (index: number) => {
-			let sortedEntries = [...entries].sort((a, b) => {
-				if (b[index] < a[index]) return 1;
-				return 0;
-			});
-
 			headers[index].sortOrder = "ascending";
-			setEntries(sortedEntries);
+			setEntries(
+				[...entries].sort((a, b) => {
+					return b[index] < a[index] ? 1 : 0;
+				})
+			);
 		};
 
 		const sortDescending = (index: number) => {
-			let sortedEntries = [...entries].sort((a, b) => {
-				if (b[index] > a[index]) return 1;
-				return 0;
-			});
-
 			headers[index].sortOrder = "descending";
-			setEntries(sortedEntries);
+			setEntries(
+				[...entries].sort((a, b) => {
+					return b[index] > a[index] ? 1 : 0;
+				})
+			);
 		};
 
 		const clearSortingForOtherHeaders = (index: number) => {
