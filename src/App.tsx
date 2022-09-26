@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { SelectOption } from "./components/Select/SelectTypes";
-import Select from "./components/Select/Select";
 import DATA from "./constants/data.json";
+import Select from "./components/Select/Select";
 import Table from "./components/Table/Table";
+import ToDo from "./components/ToDo/ToDo";
 
 const App = () => {
 	const [multipleSelectValue, setMultipleSelectValue] = useState<SelectOption[]>([
@@ -18,6 +19,7 @@ const App = () => {
 				// Each component is made using React/Typescript. Feel free to play around and check them
 				out.
 			</h1>
+
 			<div className="container">
 				<h3 className="container__title">Single/Multiple Select</h3>
 				<Select
@@ -36,6 +38,10 @@ const App = () => {
 			<div className="container">
 				<h3 className="container__title">Table</h3>
 				<Table data={DATA.tableData} striped />
+			</div>
+
+			<div className="container">
+				<ToDo toDoList={[]} />
 			</div>
 		</div>
 	);
