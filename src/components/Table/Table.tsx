@@ -41,7 +41,11 @@ const Table = ({ data, striped }: TableProps) => {
 			headers[index].sortOrder = "ascending";
 			setEntries(
 				[...entries].sort((a, b) => {
-					return b[index] < a[index] ? 1 : 0;
+					if (b[index] > a[index]) {
+						return -1;
+					} else if (b[index] === a[index]) {
+						return 0;
+					} else return 1;
 				})
 			);
 		};
@@ -50,7 +54,11 @@ const Table = ({ data, striped }: TableProps) => {
 			headers[index].sortOrder = "descending";
 			setEntries(
 				[...entries].sort((a, b) => {
-					return b[index] > a[index] ? 1 : 0;
+					if (b[index] < a[index]) {
+						return -1;
+					} else if (b[index] === a[index]) {
+						return 0;
+					} else return 1;
 				})
 			);
 		};
@@ -65,8 +73,6 @@ const Table = ({ data, striped }: TableProps) => {
 			clearSortingForOtherHeaders(index);
 			if (headers[index].sortOrder === "ascending") {
 				sortDescending(index);
-			} else if (headers[index].sortOrder === "descending") {
-				sortAscending(index);
 			} else sortAscending(index);
 		};
 
