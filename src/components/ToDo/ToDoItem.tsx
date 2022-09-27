@@ -9,12 +9,13 @@ const ToDoItem = ({ text, onDelete }: ToDoItemProps) => {
 			<h3 className={`todo__title ${isChecked && "checked"}`}>{text}</h3>
 			<div className="todo__controls">
 				<span
+					tabIndex={0}
 					className={`todo__check ${isChecked && "checked"}`}
 					onClick={() => setIsChecked((prev) => !prev)}
 				>
 					&#x2713;
 				</span>
-				<span className="todo__remove" onClick={() => onDelete(text)}>
+				<span tabIndex={0} className="todo__remove" onClick={() => onDelete(text)}>
 					&times;
 				</span>
 			</div>

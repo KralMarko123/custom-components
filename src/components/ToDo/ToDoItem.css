@@ -42,6 +42,7 @@
 	background-color: transparent;
 	border: var(--todo-button-border);
 	border-radius: var(--todo-button-radius);
+	outline: none;
 
 	color: var(--text-color);
 	font-family: var(--main-font);
@@ -84,7 +85,8 @@
 	background-color: var(--light-accent);
 }
 
-.todo__check:hover::after {
+.todo__check:hover::after,
+.todo__check:focus::after {
 	width: 100%;
 }
 
@@ -96,7 +98,8 @@
 	background-color: var(--danger);
 }
 
-.todo__remove:hover::after {
+.todo__remove:hover::after,
+.todo__remove:focus::after {
 	width: 100%;
 }
 

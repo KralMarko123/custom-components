@@ -43,13 +43,14 @@ const ToDo = ({ items }: ToDoProps) => {
 			<div className="todo__card">
 				<form onSubmit={(e) => onSubmit(e)} className={`todo__form ${!isValid && "invalid"}`}>
 					<input
+						tabIndex={0}
 						className="todo__input"
 						type="text"
 						onChange={onChange}
 						ref={inputRef}
 						placeholder="Enter text here..."
 					/>
-					<button type="submit" className="todo__form__button">
+					<button tabIndex={0} type="submit" className="todo__form__button">
 						Add Item
 					</button>
 				</form>

@@ -58,6 +58,10 @@
 	font-size: 1.5em;
 }
 
+.todo__input:focus {
+	outline: solid 0.125em var(--light-accent);
+}
+
 .todo__form__button {
 	width: 20%;
 	padding: 0.5em 0em;
@@ -74,7 +78,8 @@
 	cursor: pointer;
 }
 
-.todo__form__button:hover {
+.todo__form__button:hover,
+.todo__form__button:focus {
 	background-color: var(--light-accent);
 }
 
