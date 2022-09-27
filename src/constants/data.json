@@ -16,5 +16,7 @@
 			[4, "Filip Markovikj", 53, "30-10-1969", "Interpreter", "Cycling"],
 			[5, "Elisaveta Markovikj", 52, "09-02-1970", "Archivist", "Dogs"]
 		]
-	}
+	},
+
+	"toDoItems": ["Make a React App", "Make a To Do Component", "Find a reason to exist"]
 }

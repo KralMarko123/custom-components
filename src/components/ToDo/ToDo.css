@@ -7,23 +7,29 @@
 	--light-accent: #03a89e;
 	--danger: #ff2400;
 	--danger-accent: #faa0a0;
+	--neutral: #ffa500;
 
 	/**TEXT*/
 	--main-font: "Source Code Pro", monospace;
 	--text-color: var(--light);
-	--font-size: 2.5em;
+
+	/**UTILITY*/
+	--card-border: solid 0.1em var(--dark);
+	--todo-button-border: solid 0.1em var(--text-color);
+	--todo-button-radius: 0.125em;
 }
 
 .todo__container {
 	width: 100%;
 
-	font-size: 3em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 }
 
 .todo__card {
 	width: 100%;
-	padding: 0.25em;
-	margin: 1em 0;
+	padding: 2em;
 
 	background-color: var(--dark);
 	border-radius: 0.25em;
@@ -31,52 +37,88 @@
 
 .todo__form {
 	width: 100%;
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: 1em;
 }
 
-.todo__form.invalid input {
-	border: solid 2px var(--danger);
+.todo__form.invalid .todo__input {
+	border: solid 0.1em var(--danger);
 }
 
 .todo__input {
-	width: 100%;
+	width: calc(80% - 1em);
+	padding: 0.5em 1em;
 	border: none;
 	outline: none;
 
-	font-size: 0.5em;
+	font-family: var(--main-font);
+	font-size: 1.5em;
 }
 
 .todo__form__button {
-	padding: 1em 2em;
-	margin: 0 0.5rem;
+	width: 20%;
+	padding: 0.5em 0em;
 
-	background-color: var(--green);
-	border: none;
-	border-radius: 5px;
-	color: white;
+	background-color: transparent;
+	border: var(--todo-button-border);
+	border-radius: var(--todo-button-radius);
 
-	transition: all 0.2s ease-in-out;
+	color: var(--text-color);
+	font-family: var(--main-font);
+	font-size: 1.5em;
+
+	text-align: center;
+	cursor: pointer;
 }
 
 .todo__form__button:hover {
-	cursor: pointer;
-	filter: brightness(90%);
+	background-color: var(--light-accent);
+}
+
+.todo__list {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.todo__list h1 {
+	font-family: var(--main-font);
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+	.todo__input,
+	.todo__form__button {
+		align-self: stretch;
+		font-size: 1.25em;
+	}
 }
 
 @media (max-width: 767px) {
+	.todo__card {
+		padding: 1em;
+	}
+
 	.todo__form {
 		flex-direction: column;
 	}
 
-	.todo__input {
-		width: 100%;
-		margin: 1rem 0rem;
-	}
-
+	.todo__input,
 	.todo__form__button {
 		width: 100%;
+		padding: 0.5em 0.25em;
+		font-size: 1em;
+	}
+
+	.todo__list h1 {
+		font-size: 1.25em;
 	}
 }

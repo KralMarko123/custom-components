@@ -41,7 +41,8 @@ const App = () => {
 			</div>
 
 			<div className="container">
-				<ToDo toDoList={[]} />
+				<h3 className="container__title">ToDo</h3>
+				<ToDo items={DATA.toDoItems} />
 			</div>
 		</div>
 	);
