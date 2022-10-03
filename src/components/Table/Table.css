@@ -1,23 +1,9 @@
 :root {
-	/**COLOR*/
-	--base: #202020;
-	--dark: #333533;
-	--dark-accent: #23395d;
-	--light: whitesmoke;
-	--light-accent: #03a89e;
-	--danger: #ff2400;
-	--danger-accent: #faa0a0;
-
-	/**TEXT*/
-	--main-font: "Source Code Pro", monospace;
-	--text-color: var(--light);
-	--table-font-size: 1.5em;
-
 	/**WIDTHS & HEIGHTS*/
 	--table-width: fit-content;
 
 	/**UTILITY*/
-	--table-border: solid 0.125em var(--dark);
+	--table-border: solid 0.1em var(--dark);
 	--cell-padding: 0.5em;
 }
 
@@ -31,7 +17,7 @@
 
 .table {
 	font-family: var(--main-font);
-	font-size: var(--table-font-size);
+	font-size: 1.5em;
 	color: var(--text-color);
 }
 
@@ -96,15 +82,13 @@
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-	:root {
-		/**TEXT*/
-		--table-font-size: 1.35em;
+	.table {
+		font-size: 1.25em;
 	}
 }
 
 @media (max-width: 767px) {
-	:root {
-		/**TEXT*/
-		--table-font-size: 1.15em;
+	.table {
+		font-size: 1em;
 	}
 }

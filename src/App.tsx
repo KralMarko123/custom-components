@@ -4,6 +4,7 @@ import DATA from "./constants/data.json";
 import Select from "./components/Select/Select";
 import Table from "./components/Table/Table";
 import ToDo from "./components/ToDo/ToDo";
+import Accordion from "./components/Accordion/Accordion";
 
 const App = () => {
 	const [multipleSelectValue, setMultipleSelectValue] = useState<SelectOption[]>([
@@ -21,7 +22,7 @@ const App = () => {
 			</h1>
 
 			<div className="container">
-				<h3 className="container__title">Single/Multiple Select</h3>
+				<h2 className="container__title">Single/Multiple Select</h2>
 				<Select
 					multiple
 					value={multipleSelectValue}
@@ -36,13 +37,18 @@ const App = () => {
 			</div>
 
 			<div className="container">
-				<h3 className="container__title">Table</h3>
+				<h2 className="container__title">Table</h2>
 				<Table data={DATA.tableData} striped />
 			</div>
 
 			<div className="container">
-				<h3 className="container__title">ToDo</h3>
+				<h2 className="container__title">ToDo</h2>
 				<ToDo items={DATA.toDoItems} />
+			</div>
+
+			<div className="container">
+				<h2 className="container__title">Accordion</h2>
+				<Accordion items={DATA.accordionItems} />
 			</div>
 		</div>
 	);

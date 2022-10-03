@@ -1,20 +1,5 @@
 :root {
-	/**COLOR*/
-	--base: #202020;
-	--dark: #333533;
-	--dark-accent: #23395d;
-	--light: whitesmoke;
-	--light-accent: #03a89e;
-	--danger: #ff2400;
-	--danger-accent: #faa0a0;
-	--neutral: #ffa500;
-
-	/**TEXT*/
-	--main-font: "Source Code Pro", monospace;
-	--text-color: var(--light);
-
 	/**UTILITY*/
-	--card-border: solid 0.1em var(--dark);
 	--todo-button-border: solid 0.1em var(--text-color);
 	--todo-button-radius: 0.125em;
 }
@@ -32,7 +17,7 @@
 	padding: 2em;
 
 	background-color: var(--dark);
-	border-radius: 0.25em;
+	border-radius: 0.5em;
 }
 
 .todo__form {

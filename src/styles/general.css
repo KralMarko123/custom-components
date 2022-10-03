@@ -1,8 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-:root {
-	--container-width: 1200px;
-}
+@import url(./variables.css);
 
 .page {
 	width: 100%;
@@ -11,7 +7,7 @@
 	background-color: #202020;
 
 	color: white;
-	font-family: "Roboto", sans-serif;
+	font-family: var(--secondary-font);
 }
 
 .home {
@@ -25,7 +21,7 @@
 .home__desc {
 	margin-bottom: 0.25em;
 
-	font-size: 1.25em;
+	font-size: 1em;
 	letter-spacing: 2px;
 	text-align: center;
 	opacity: 0.5;
@@ -42,21 +38,9 @@
 }
 
 .container__title {
-	font-size: 1.5em;
+	font-size: 1.25em;
 	font-weight: bold;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	text-align: justify;
 	text-transform: uppercase;
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-	:root {
-		--container-width: 100%;
-	}
-}
-
-@media (max-width: 767px) {
-	:root {
-		--container-width: 100%;
-	}
 }

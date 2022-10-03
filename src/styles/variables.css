@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+	/**COLOR*/
+	--base: #202020;
+	--dark: #333533;
+	--dark-accent: #23395d;
+	--light: whitesmoke;
+	--light-accent: #03a89e;
+	--danger: #ff2400;
+	--danger-accent: #faa0a0;
+	--neutral: #ffa500;
+
+	/**TEXT*/
+	--main-font: "Source Code Pro", monospace;
+	--secondary-font: "Roboto", sans-serif;
+	--base-size: 16px;
+	--text-color: var(--light);
+
+	/**WIDTH & HEIGHTS*/
+	--container-width: 1200px;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+	:root {
+		--container-width: 100%;
+	}
+}
+
+@media (max-width: 767px) {
+	:root {
+		--container-width: 100%;
+	}
+}

@@ -1,20 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
-
 :root {
-	/**COLOR*/
-	--base: #202020;
-	--dark: #333533;
-	--dark-accent: #23395d;
-	--light: whitesmoke;
-	--light-accent: #03a89e;
-	--danger: #ff2400;
-	--danger-accent: #faa0a0;
-
-	/**TEXT*/
-	--main-font: "Source Code Pro", monospace;
-	--text-color: var(--light);
-	--font-size: 2.5em;
-
 	/**WIDTHS & HEIGHTS*/
 	--select-width: 20em;
 	--select-height: 2em;
@@ -46,7 +30,7 @@ button {
 
 	color: var(--text-color);
 	font-family: var(--main-font);
-	font-size: var(--font-size);
+	font-size: 2.5em;
 }
 
 .select__container:focus,
@@ -174,20 +158,22 @@ button {
 
 @media (min-width: 768px) and (max-width: 1199px) {
 	:root {
-		/**TEXT*/
-		--font-size: 2em;
-
 		/**WIDTHS & HEIGHTS*/
 		--select-width: 100%;
+	}
+
+	.select__container {
+		font-size: 2em;
 	}
 }
 
 @media (max-width: 767px) {
 	:root {
-		/**TEXT*/
-		--font-size: 1.25em;
-
 		/**WIDTHS & HEIGHTS*/
 		--select-width: 100%;
+	}
+
+	.select__container {
+		font-size: 1.25em;
 	}
 }

@@ -18,5 +18,19 @@
 		]
 	},
 
-	"toDoItems": ["Make a React App", "Make a To Do Component", "Find a reason to exist"]
+	"toDoItems": ["Make a React App", "Make a To Do Component", "Find a reason to exist"],
+	"accordionItems": [
+		{
+			"title": "Does it Work?",
+			"description": "Yes, but ever so slightly. What will most likely happen is some nitwit that's biased will come nitpicking about each and every detail of the page and will then proceed to curbstomp every piece of motivation I had left for this stupid excuse of a project. Other than that, it's all fine and dandy."
+		},
+		{
+			"title": "Can it help in any way?",
+			"description": "No, it definitely cannot help the fact that life is a neverending cycle of monotonous pain and dull embraces. People come to me thinking I am the key to their salvation and happiness, this cannot be further from the truth. I am but a simple man that drifts along the pavement, mimicking a piece of paper stuck in an alleyway."
+		},
+		{
+			"title": "How long does it take?",
+			"description": "Not much, a couple of seconds, maybe even an hour. Doesn't really matter seeing as time goes by so does my patience. People test me on certain things not realising the consequences of their actions. If you were to ask me what my opinion is of humans in general it would be 'out of touch'."
+		}
+	]
 }
