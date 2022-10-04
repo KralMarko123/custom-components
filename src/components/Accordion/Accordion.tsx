@@ -14,24 +14,17 @@ const Accordion = ({ items }: AccordionProps) => {
 		setAccordionItems([...items]);
 	};
 
-	const handleKeyPress = (e: KeyboardEvent<HTMLLIElement>, index: number) => {
-		console.log(e.key, index);
+	const handleKeyPress = (e: KeyboardEvent<HTMLLIElement>) => {
 		switch (e.key) {
 			case "Enter":
 			case "Space":
 				handleAccordionToggle(highlightedItem);
 				break;
 			case "ArrowUp":
-				if (highlightedItem > 0) {
-					handleAccordionToggle(highlightedItem - 1);
-					setHighlightedItem((prev) => prev - 1);
-				}
+				highlightedItem > 0 ? setHighlightedItem((prev) => prev - 1) : null;
 				break;
 			case "ArrowDown":
-				if (highlightedItem < accordionItems.length - 1) {
-					handleAccordionToggle(highlightedItem + 1);
-					setHighlightedItem((prev) => prev + 1);
-				}
+				highlightedItem < accordionItems.length - 1 ? setHighlightedItem((prev) => prev + 1) : null;
 				break;
 			default:
 				break;
@@ -57,9 +50,7 @@ const Accordion = ({ items }: AccordionProps) => {
 					tabIndex={0}
 					className={`accordion__item ${index === highlightedItem ? "highlighted" : null}`}
 					onClick={() => handleAccordionToggle(index)}
-					onMouseEnter={() => setHighlightedItem(index)}
-					onMouseLeave={() => setHighlightedItem(-1)}
-					onKeyDown={(e) => handleKeyPress(e, index)}
+					onKeyDown={(e) => handleKeyPress(e)}
 					onFocus={() => setHighlightedItem(index)}
 				>
 					<div className="accordion__top">

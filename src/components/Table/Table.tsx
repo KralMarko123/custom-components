@@ -4,6 +4,7 @@ import "./Table.css";
 
 const Table = ({ data, striped }: TableProps) => {
 	const [headers, setHeaders] = useState<any[]>([]);
+	const [highlightedHeader, setHighlightedHeader] = useState<number>(-1);
 	const [entries, setEntries] = useState<any[][]>([]);
 	const [sortApplied, setSortApplied] = useState({ sort: false, index: 0 });
 
@@ -91,18 +92,31 @@ const Table = ({ data, striped }: TableProps) => {
 							headers.map((h, index) => (
 								<th
 									key={index}
-									className={`table__header__cell ${h.sortOrder}`}
+									className={`table__header__cell ${h.sortOrder} ${
+										highlightedHeader === index ? "highlighted" : ""
+									}`}
 									onKeyDown={(e) => {
 										switch (e.key) {
 											case "Enter":
 											case "Space":
-												setSortApplied({ sort: true, index: index });
+												setSortApplied({ sort: true, index: highlightedHeader });
+												break;
+											case "ArrowLeft":
+												highlightedHeader > 0 ? setHighlightedHeader((prev) => prev - 1) : null;
+												break;
+											case "ArrowRight":
+												highlightedHeader < headers.length - 1
+													? setHighlightedHeader((prev) => prev + 1)
+													: null;
 												break;
 											default:
 												break;
 										}
 									}}
-									onClick={() => setSortApplied({ sort: true, index: index })}
+									onClick={() => {
+										setSortApplied({ sort: true, index: index });
+									}}
+									onFocus={() => setHighlightedHeader(index)}
 									tabIndex={0}
 								>
 									{h.header}
@@ -118,7 +132,10 @@ const Table = ({ data, striped }: TableProps) => {
 				<tbody className="table__body">
 					{!areEntriesEmpty() ? (
 						entries.map((e, index) => (
-							<tr className={`table__row ${index % 2 !== 0 && striped && "striped"}`} key={index}>
+							<tr
+								className={`table__row ${index % 2 !== 0 && striped ? "striped" : ""}`}
+								key={index}
+							>
 								{e.map((a) => (
 									<td className="table__cell" key={a}>
 										{a.toString()}

@@ -43,6 +43,12 @@
 
 	text-transform: uppercase;
 	cursor: pointer;
+	outline: none;
+}
+
+.table__header__cell:hover,
+.table__header__cell.highlighted {
+	background-color: var(--light-accent);
 }
 
 .table__header__cell.ascending::after {
@@ -69,12 +75,6 @@
 	border: solid var(--text-color);
 	border-width: 0 3px 3px 0;
 	transform: translateY(-50%) rotate(45deg);
-}
-
-.table__header__cell:hover,
-.table__header__cell:focus {
-	background-color: var(--light-accent);
-	outline: none;
 }
 
 .table__row.striped .table__cell {

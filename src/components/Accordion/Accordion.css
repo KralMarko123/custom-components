@@ -21,15 +21,12 @@
 	gap: 0.5em;
 
 	cursor: pointer;
-}
-
-.accordion__item:focus {
 	outline: none;
 }
 
+.accordion__item:hover,
 .accordion__item.highlighted {
 	background-color: var(--dark-accent);
-	outline: none;
 }
 
 .accordion .accordion__item:last-of-type {
