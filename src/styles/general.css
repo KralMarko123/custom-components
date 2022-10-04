@@ -3,7 +3,7 @@
 .page {
 	width: 100%;
 	min-height: 100vh;
-	padding: 2em 1em;
+	padding: 1em 0.5em;
 	background-color: #202020;
 
 	color: white;
@@ -15,16 +15,29 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	gap: 3em;
+	gap: 2em;
+}
+
+.header,
+.footer {
+	width: 100%;
+	padding: 0em 2em;
 }
 
 .home__desc {
-	margin-bottom: 0.25em;
-
-	font-size: 1em;
-	letter-spacing: 2px;
+	font-size: 1.25em;
+	letter-spacing: 1px;
 	text-align: center;
 	opacity: 0.5;
+}
+.home__desc a {
+	text-decoration: none;
+	color: var(--light-accent);
+}
+
+.home__desc a:hover,
+.home__desc a:focus {
+	text-decoration: underline;
 }
 
 .container {

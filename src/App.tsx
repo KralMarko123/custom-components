@@ -16,10 +16,12 @@ const App = () => {
 
 	return (
 		<div className="home page">
-			<h1 className="home__desc">
-				// Each component is made using React/Typescript. Feel free to play around and check them
-				out.
-			</h1>
+			<header className="header">
+				<h1 className="home__desc">
+					// Each component is made using React/Typescript. Feel free to play around and check them
+					out.
+				</h1>
+			</header>
 
 			<div className="container">
 				<h2 className="container__title">Single/Multiple Select</h2>
@@ -50,6 +52,14 @@ const App = () => {
 				<h2 className="container__title">Accordion</h2>
 				<Accordion items={DATA.accordionItems} />
 			</div>
+			<footer className="footer">
+				<h1 className="home__desc">
+					// Check out the source code{" "}
+					<a href="https://github.com/KralMarko123/custom-components" target="_blank">
+						here.
+					</a>
+				</h1>
+			</footer>
 		</div>
 	);
 };
