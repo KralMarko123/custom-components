@@ -17,6 +17,11 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 
 	const showNextImage = () => {
 		let currImages = [...images];
+
+		if (shownImageIndex === images.length - 1) {
+			currImages = [...images, ...images];
+		}
+
 		currImages.forEach((img) => {
 			img.pos -= 100;
 		});
@@ -33,7 +38,7 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 					pos: i * 100,
 				})
 			);
-			setImages(imageArray);
+			setImages(imageURLS);
 		};
 		generateImages();
 	}, [imageURLS]);
@@ -58,11 +63,9 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 				}
 			}}
 		>
-			{shownImageIndex > 0 && (
-				<span className="carousel__arrow previous" onClick={() => showPreviousImage()}>
-					&lt;
-				</span>
-			)}
+			<span className="carousel__arrow previous" onClick={() => showPreviousImage()}>
+				&lt;
+			</span>
 
 			{images.length > 0 ? (
 				images.map((image) => (
@@ -78,11 +81,9 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 				<h1>No Images Found</h1>
 			)}
 
-			{shownImageIndex < images.length - 1 && (
-				<span className="carousel__arrow next" onClick={() => showNextImage()}>
-					&gt;
-				</span>
-			)}
+			<span className="carousel__arrow next" onClick={() => showNextImage()}>
+				&gt;
+			</span>
 		</div>
 	);
 };
