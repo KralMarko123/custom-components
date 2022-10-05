@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { SelectOption } from "./components/Select/SelectTypes";
+import { IMAGE_URLS } from "./constants/images";
 import DATA from "./constants/data.json";
 import Select from "./components/Select/Select";
 import Table from "./components/Table/Table";
 import ToDo from "./components/ToDo/ToDo";
 import Accordion from "./components/Accordion/Accordion";
+import Carousel from "./components/Carousel/Carousel";
 
 const App = () => {
 	const [multipleSelectValue, setMultipleSelectValue] = useState<SelectOption[]>([
@@ -52,6 +54,12 @@ const App = () => {
 				<h2 className="container__title">Accordion</h2>
 				<Accordion items={DATA.accordionItems} />
 			</div>
+
+			<div className="container">
+				<h2 className="container__title">Carousel</h2>
+				<Carousel imageURLS={IMAGE_URLS} />
+			</div>
+
 			<footer className="footer">
 				<h1 className="home__desc">
 					// Check out the source code{" "}

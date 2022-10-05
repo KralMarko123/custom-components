@@ -63,10 +63,10 @@
 
 @media (max-width: 767px) {
 	.accordion__top {
-		font-size: 1.25em;
+		font-size: 1em;
 	}
 
 	.accordion__bottom {
-		font-size: 1em;
+		font-size: 0.95em;
 	}
 }
