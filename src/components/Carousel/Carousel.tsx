@@ -1,44 +1,70 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CarouselProps } from "./CarouselTypes";
 import "./Carousel.css";
 
 const Carousel = ({ imageURLS }: CarouselProps) => {
-	const [images, setImages] = useState<any[]>([]);
-	const [shownImageIndex, setShownImageIndex] = useState(0);
+	const [images, setImages] = useState<any>({});
+	const [activeIndex, setActiveIndex] = useState(0);
+	const prevImageRef = useRef<HTMLImageElement>(null);
+	const currImageRef = useRef<HTMLImageElement>(null);
+	const nextImageRef = useRef<HTMLImageElement>(null);
+
+	const recalculateImages = (newActiveIndex: number) => {
+		let prevImage, nextImage;
+		newActiveIndex - 1 >= 0
+			? (prevImage = imageURLS[newActiveIndex - 1])
+			: (prevImage = imageURLS[imageURLS?.length - 1]);
+		newActiveIndex + 1 <= imageURLS?.length - 1
+			? (nextImage = imageURLS[newActiveIndex + 1])
+			: (nextImage = imageURLS[0]);
+
+		setImages({
+			prev: prevImage,
+			curr: imageURLS[newActiveIndex],
+			next: nextImage,
+		});
+		setActiveIndex(newActiveIndex);
+	};
 
 	const showPreviousImage = () => {
-		let currImages = [...images];
-		currImages.forEach((img) => {
-			img.pos += 100;
-		});
-		setImages(currImages);
-		setShownImageIndex((prev) => prev - 1);
+		let newActiveIndex = activeIndex;
+		currImageRef.current!.style.left = "100%";
+		prevImageRef.current!.style.left = "0";
+
+		setTimeout(() => {
+			if (newActiveIndex - 1 >= 0) {
+				recalculateImages(newActiveIndex - 1);
+			} else recalculateImages(imageURLS?.length - 1);
+		}, 250);
 	};
 
 	const showNextImage = () => {
-		let currImages = [...images];
+		let newActiveIndex = activeIndex;
+		currImageRef.current!.style.left = "-100%";
+		nextImageRef.current!.style.left = "0";
 
-		if (shownImageIndex === images.length - 1) {
-			currImages = [...images, ...images];
-		}
-
-		currImages.forEach((img) => {
-			img.pos -= 100;
-		});
-		setImages(currImages);
-		setShownImageIndex((prev) => prev + 1);
+		setTimeout(() => {
+			if (newActiveIndex + 1 <= imageURLS?.length - 1) {
+				recalculateImages(newActiveIndex + 1);
+			} else recalculateImages(0);
+		}, 250);
 	};
 
 	useEffect(() => {
 		const generateImages = () => {
-			let imageArray: any[] = [];
-			imageURLS?.forEach((img, i) =>
-				imageArray.push({
-					src: img,
-					pos: i * 100,
-				})
-			);
-			setImages(imageURLS);
+			if (imageURLS?.length >= 2) {
+				setImages({
+					prev: imageURLS[imageURLS?.length - 1],
+					curr: imageURLS[0],
+					next: imageURLS[1],
+				});
+			} else {
+				setImages({
+					prev: imageURLS[0],
+					curr: imageURLS[0],
+					next: imageURLS[0],
+				});
+			}
 		};
 		generateImages();
 	}, [imageURLS]);
@@ -52,11 +78,11 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 					case "ArrowLeft":
 					case "Backspace":
 					case "Space":
-						shownImageIndex > 0 ? showPreviousImage() : null;
+						showPreviousImage();
 						break;
 					case "ArrowRight":
 					case "Enter":
-						shownImageIndex < images.length - 1 ? showNextImage() : null;
+						showNextImage();
 						break;
 					default:
 						break;
@@ -67,16 +93,33 @@ const Carousel = ({ imageURLS }: CarouselProps) => {
 				&lt;
 			</span>
 
-			{images.length > 0 ? (
-				images.map((image) => (
+			{imageURLS?.length > 0 ? (
+				<>
 					<img
-						key={image.src}
+						key={images.prev}
 						alt="carousel__image"
-						src={image.src}
+						src={images.prev}
 						className="carousel__image"
-						style={{ left: `${image.pos}%` }}
+						style={{ left: "-100%" }}
+						ref={prevImageRef}
 					/>
-				))
+					<img
+						key={images.curr}
+						alt="carousel__image"
+						src={images.curr}
+						className="carousel__image"
+						style={{ left: "0" }}
+						ref={currImageRef}
+					/>
+					<img
+						key={images.next}
+						alt="carousel__image"
+						src={images.next}
+						className="carousel__image"
+						style={{ left: "100%" }}
+						ref={nextImageRef}
+					/>
+				</>
 			) : (
 				<h1>No Images Found</h1>
 			)}
