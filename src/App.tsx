@@ -57,7 +57,7 @@ const App = () => {
 
 			<div className="container">
 				<h2 className="container__title">Carousel</h2>
-				<Carousel imageURLS={IMAGE_URLS} />
+				<Carousel imageURLS={IMAGE_URLS} sliderSpeed={0.35} />
 			</div>
 
 			<footer className="footer">

@@ -16,7 +16,20 @@
 }
 
 .carousel h1 {
+	display: none;
 	font-size: 2em;
+}
+
+.carousel.empty img {
+	display: none;
+}
+
+.carousel.empty h1 {
+	display: block;
+}
+
+.carousel.empty .carousel__arrow {
+	display: none;
 }
 
 .carousel:focus {
@@ -32,8 +45,6 @@
 
 	object-fit: cover;
 	aspect-ratio: 9 / 16;
-
-	transition: all 0.25s ease;
 }
 
 .carousel__arrow {
