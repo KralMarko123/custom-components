@@ -85,8 +85,39 @@
 	right: 2.5%;
 }
 
+.carousel__dots {
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+
+	display: flex;
+	gap: 1em;
+
+	transform: translateX(-50%);
+}
+
+.carousel__dot {
+	width: 1.5em;
+	height: 1.5em;
+	background-color: var(--light-accent);
+	border-radius: 50%;
+
+	opacity: 0.5;
+	cursor: pointer;
+	outline: none;
+}
+
+.carousel__dot:hover {
+	opacity: 1;
+}
+
 @media (max-width: 767px) {
 	.carousel__arrow {
 		font-size: 2em;
+	}
+
+	.carousel__arrow,
+	.carousel__dot {
+		opacity: 1;
 	}
 }

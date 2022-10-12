@@ -172,6 +172,21 @@ const Carousel = ({ imageURLS, sliderSpeed }: CarouselProps) => {
 					&gt;
 				</span>
 			)}
+
+			{!isSliding && imageURLS?.length >= 4 && (
+				<div className="carousel__dots">
+					{imageURLS?.map((img, i) => (
+						<span
+							key={i}
+							className="carousel__dot"
+							onClick={() => {
+								setIsSliding(true);
+								recalculateImages(i);
+							}}
+						></span>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
