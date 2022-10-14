@@ -7,6 +7,7 @@ import Table from "./components/Table/Table";
 import ToDo from "./components/ToDo/ToDo";
 import Accordion from "./components/Accordion/Accordion";
 import Carousel from "./components/Carousel/Carousel";
+import Timer from "./components/Timer/Timer";
 
 const App = () => {
 	const [multipleSelectValue, setMultipleSelectValue] = useState<SelectOption[]>([
@@ -58,6 +59,11 @@ const App = () => {
 			<div className="container">
 				<h2 className="container__title">Carousel</h2>
 				<Carousel imageURLS={IMAGE_URLS} sliderSpeed={0.35} />
+			</div>
+
+			<div className="container">
+				<h2 className="container__title">Timer</h2>
+				<Timer start={10} increment={0.5} />
 			</div>
 
 			<footer className="footer">
