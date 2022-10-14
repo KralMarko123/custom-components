@@ -32,7 +32,12 @@ const Timer = ({ start, decrement }: TimerProps) => {
 		<div className="timer">
 			<div className="timer__controls">
 				<span className="timer__time">{Math.floor(timeLeft)}</span>
-				<button className="timer__reset" onClick={() => setTimeLeft(start)}>
+				<button
+					className="timer__reset"
+					tabIndex={0}
+					onClick={() => setTimeLeft(start)}
+					onKeyDown={(e) => (e.key === "Enter" ? setTimeLeft(start) : null)}
+				>
 					Reset Timer
 				</button>
 			</div>

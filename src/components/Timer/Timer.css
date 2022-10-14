@@ -43,9 +43,11 @@
 	text-transform: uppercase;
 	text-align: center;
 	cursor: pointer;
+	outline: none;
 }
 
-.timer__reset:hover {
+.timer__reset:hover,
+.timer__reset:focus {
 	background-color: var(--light-accent);
 }
 
