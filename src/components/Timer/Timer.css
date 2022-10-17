@@ -20,9 +20,9 @@
 .timer__time {
 	display: flex;
 	align-items: center;
-	gap: 1em;
+	gap: 0.5em;
 
-	font-size: 3em;
+	font-size: 4em;
 }
 
 .timer.open .timer__time {
@@ -48,6 +48,45 @@
 .timer.open .minutes,
 .timer.open .seconds {
 	opacity: 0.5;
+}
+
+.timer.open .hours.highlight,
+.timer.open .minutes.highlight,
+.timer.open .seconds.highlight {
+	opacity: 1;
+}
+
+.timer__controls {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 1em;
+}
+
+.timer__start,
+.timer__stop,
+.timer__reset {
+	width: 100%;
+	padding: 0.5em;
+	outline: none;
+	border-radius: 0.125em;
+
+	font-size: 1.5em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.timer__start,
+.timer__stop {
+	background-color: var(--dark-accent);
+}
+
+.timer__stop {
+	opacity: 0.85;
+}
+
+.timer__reset {
+	background-color: var(--dark);
 }
 
 @keyframes blink {
