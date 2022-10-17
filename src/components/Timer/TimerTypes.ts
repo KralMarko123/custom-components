@@ -1,4 +1,5 @@
 export type TimerProps = {
-	start: number;
-	decrement?: number;
+	hours?: number;
+	minutes?: number;
+	seconds?: number;
 };

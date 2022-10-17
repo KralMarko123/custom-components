@@ -1,5 +1,5 @@
 .timer {
-	border: solid 0.25em var(--dark);
+	border: solid 0.125em var(--dark);
 	padding: 1em;
 	border-radius: 0.125em;
 
@@ -10,68 +10,48 @@
 	gap: 1em;
 
 	font-family: var(--main-font);
+	cursor: pointer;
 }
 
-.timer__controls {
-	display: flex;
-	align-items: center;
-	gap: 1em;
-}
-
-.timer__time,
-.timer__reset {
-	border-radius: 0.125em;
+.timer.open {
+	border-color: var(--light-accent);
 }
 
 .timer__time {
-	max-width: 5em;
-	padding: 0em 0.5em;
-
-	background-color: var(--dark);
+	display: flex;
+	align-items: center;
+	gap: 1em;
 
 	font-size: 3em;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
-.timer__reset {
-	padding: 0.25em;
-	background-color: var(--dark-accent);
-	font-size: 2em;
-	text-transform: uppercase;
-	text-align: center;
-	cursor: pointer;
-	outline: none;
+.timer.open .timer__time {
+	position: relative;
+	padding-right: 0.25em;
 }
 
-.timer__reset:hover,
-.timer__reset:focus {
+.timer.open .timer__time::after {
 	background-color: var(--light-accent);
+	content: "";
+	display: block;
+	height: 80%;
+	width: 0.05em;
+
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	animation: blink 1s steps(5, start) infinite;
 }
 
-.timer__info {
-	font-size: 1.5em;
+.timer.open .hours,
+.timer.open .minutes,
+.timer.open .seconds {
 	opacity: 0.5;
-	text-align: center;
 }
 
-@media (max-width: 767px) {
-	.timer {
-		min-width: fit-content;
-	}
-
-	.timer__time {
-		max-width: 3em;
-	}
-
-	.timer__reset {
-		font-size: 1.25em;
-	}
-
-	.timer__info {
-		font-size: 1em;
-		text-align: justify;
+@keyframes blink {
+	to {
+		visibility: hidden;
 	}
 }

@@ -63,7 +63,7 @@ const App = () => {
 
 			<div className="container">
 				<h2 className="container__title">Timer</h2>
-				<Timer start={10} />
+				<Timer />
 			</div>
 
 			<footer className="footer">
