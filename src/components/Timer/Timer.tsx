@@ -2,12 +2,12 @@ import { useState, useEffect, KeyboardEvent } from "react";
 import { TimerProps } from "./TimerTypes";
 import "./Timer.css";
 
-const Timer = ({ hours, minutes, seconds }: TimerProps) => {
+const Timer = ({ hours, minutes, seconds, shouldStart }: TimerProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [digits, setDigits] = useState([0, 0, 0, 0, 0, 0]);
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [isStarted, setIsStarted] = useState(false);
-	const [highlightAt, setHighlightAt] = useState(0);
+	const [highlightAt, setHighlightAt] = useState(6);
 
 	const calculateDigitsFromTimeLeft = () => {
 		let hours = Math.floor(timeLeft / 3600);
@@ -55,9 +55,42 @@ const Timer = ({ hours, minutes, seconds }: TimerProps) => {
 				newDigits[5] = digitEntered;
 				setDigits(newDigits);
 
-				setHighlightAt((prev) => prev + 1);
+				setHighlightAt((prev) => (prev - 1 <= 0 ? 0 : prev - 1));
 			}
-		} else return;
+
+			switch (e.key) {
+				case "Enter":
+					toggleTimer();
+					setIsOpen(false);
+					break;
+				case "Backspace":
+				case "Delete":
+					let newDigits = [...digits];
+					for (let i = 0; i <= 5; i++) {
+						if (newDigits[i] === 0) continue;
+						newDigits[i] = 0;
+						break;
+					}
+					setDigits(newDigits);
+					setHighlightAt((prev) => (prev + 1 >= 6 ? 6 : prev + 1));
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (e.key) {
+				case "Enter":
+				case "Space":
+					openTimer();
+					break;
+				case "Backspace":
+				case "Delete":
+					resetTimer();
+					break;
+				default:
+					break;
+			}
+		}
 	};
 
 	const openTimer = () => {
@@ -76,6 +109,15 @@ const Timer = ({ hours, minutes, seconds }: TimerProps) => {
 		if (getTimeFromDigits() > 0) {
 			setIsStarted(true);
 		}
+
+		setHighlightAt(6);
+	};
+
+	const resetTimer = () => {
+		setIsStarted(false);
+		setTimeLeft(0);
+		setDigits([0, 0, 0, 0, 0, 0]);
+		setHighlightAt(6);
 	};
 
 	useEffect(() => {
@@ -96,22 +138,24 @@ const Timer = ({ hours, minutes, seconds }: TimerProps) => {
 			<div
 				className="timer__time"
 				onClick={() => openTimer()}
+				onFocus={() => setIsOpen(true)}
 				onBlur={() => {
 					setIsOpen(false);
-					setHighlightAt(-1);
+					setHighlightAt(6);
 				}}
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
-				<span
-					className={`hours ${highlightAt >= 4 ? "highlight" : ""}`}
-				>{`${digits[0]}${digits[1]}h`}</span>
-				<span
-					className={`minutes ${highlightAt >= 2 ? "highlight" : ""}`}
-				>{`${digits[2]}${digits[3]}m`}</span>
-				<span
-					className={`seconds ${highlightAt >= 0 ? "highlight" : ""}`}
-				>{`${digits[4]}${digits[5]}s`}</span>
+				{digits.map((d, i) => {
+					return (
+						<span key={i} className={`timer__digit ${highlightAt <= i ? "highlight" : ""}`}>
+							{d}
+							{i === 1 && <span className="timer__suffix">h</span>}
+							{i === 3 && <span className="timer__suffix">m</span>}
+							{i === 5 && <span className="timer__suffix">s</span>}
+						</span>
+					);
+				})}
 			</div>
 
 			<div className="timer__controls">
@@ -121,7 +165,9 @@ const Timer = ({ hours, minutes, seconds }: TimerProps) => {
 				>
 					{!isStarted ? "Start" : "Stop"}
 				</button>
-				<button className="timer__reset">Reset</button>
+				<button className="timer__reset" onClick={() => resetTimer()}>
+					Reset
+				</button>
 			</div>
 		</div>
 	);
