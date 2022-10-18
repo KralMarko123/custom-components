@@ -1,8 +1,9 @@
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { TimerProps } from "./TimerTypes";
 import "./Timer.css";
 
 const Timer = ({ hours, minutes, seconds, shouldStart }: TimerProps) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [digits, setDigits] = useState([0, 0, 0, 0, 0, 0]);
 	const [timeLeft, setTimeLeft] = useState(0);
@@ -96,6 +97,7 @@ const Timer = ({ hours, minutes, seconds, shouldStart }: TimerProps) => {
 	const openTimer = () => {
 		setIsOpen(true);
 		setIsStarted(false);
+		inputRef.current?.focus();
 	};
 
 	const toggleTimer = () => {
@@ -146,6 +148,7 @@ const Timer = ({ hours, minutes, seconds, shouldStart }: TimerProps) => {
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
+				<input inputMode="numeric" pattern="[0-9]*" ref={inputRef} />
 				{digits.map((d, i) => {
 					return (
 						<span key={i} className={`timer__digit ${highlightAt <= i ? "highlight" : ""}`}>

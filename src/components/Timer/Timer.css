@@ -23,6 +23,13 @@
 	outline: none;
 }
 
+/**TO ENABLE MOBILE FUNCTIONALITY*/
+.timer__time input {
+	z-index: -1;
+	width: 0;
+	height: 0;
+}
+
 .timer.open .timer__time {
 	position: relative;
 	padding-right: 0.25em;
@@ -68,6 +75,10 @@
 	gap: 1em;
 }
 
+.timer__controls button:hover {
+	opacity: 0.75;
+}
+
 .timer__start,
 .timer__stop,
 .timer__reset {
@@ -84,10 +95,6 @@
 .timer__start,
 .timer__stop {
 	background-color: var(--dark-accent);
-}
-
-.timer__stop {
-	opacity: 0.85;
 }
 
 .timer__reset {
